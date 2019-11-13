@@ -32,21 +32,26 @@ blockchain, patent, machine learning, smart contracts, prior art, full-motion vi
 
 \section{Introduction}
 
-Consider the case of legal and operational decision making based on evidence presented in the form of modern media files (e.g. full-motion videos, textual documents, audio files), such as court trials and journalism. Guaranteeing content genuity (i.e. authenticity) is crucial, and failing to do so risks undermining the legitimacy of the decision maker. For example, journalists fact check their findings before publishing news articles; patent clerks exhaustively gather evidence of absence of prior art before emitting patent certificates; and media archives (e.g. YouTube) protects artists by taking down copyright-infringing content. Scholarly peer review systems also share this characteristic, where a reviewer is tasked with evaluating the claims made in an academic paper during the process of submission to a conference or journal. 
+Consider the case of decision making based on evidence presented in the form of modern media files (e.g. full-motion videos, textual documents, audio files), such as court trials and journalism. Guaranteeing content genuity (i.e. authenticity) is crucial, and failing to do so risks undermining the legitimacy of the decision maker. For example, journalists fact check their findings before publishing news articles; patent clerks exhaustively gather evidence of absence of prior art before emitting patent certificates; and media archives (e.g. YouTube) protects artists by taking down copyright-infringing content. Scholarly peer review systems also share this characteristic, where a reviewer is tasked with evaluating the claims made in an academic paper during the process of submission to a conference or journal. 
 
-The central concept underlying the aforementioned examples is \emph{novelty}. What constitutes as novel is often the cause of discourse due to its subjective nature and the trust bestowed upon a centralized agent to discriminate on what is, and what is is not, genuinely novel. More recently, a new issue has emerged due to the proliferation of digital content in the internet age; \emph{novelty discovery}. Even if the definition of novelty can be agreed upon by interested parties, exhaustively comparing candidate and existing contents can be computationally intractable due to large data volumes (e.g. 500 hours of video images are uploaded to YouTube every minute).
+    The central concepts underlying the aforementioned examples are \emph{novelty} and \emph{authenticity} (i.e. how new and real something is, respectively). What constitutes as novel is often the cause of discourse due to its subjective nature and the trust bestowed upon a centralized agent to discriminate on what is, and what is is not, genuinely novel. More recently, a new issue has emerged due to the proliferation of digital content in the internet age; verifying novelty against large archives. Even if the definition of novelty can be agreed upon by interested parties, exhaustively comparing candidate and existing contents can be computationally intractable due to large data volumes (e.g. 500 hours of video images are uploaded to YouTube every minute). Defining and securing authenticity is comparably more mature and has benefited considerably in recent years with the advent of Digital Signatures.
 
+In the case of media archives, checking for novelty prior to acceptance can be seen as a way of preserving the moral integrity of \emph{currently} archived content. A malicious agent can attack content by submitting a modified version and leverage social media as a vector for propagating false information. Complexity of attacks range from audio manipulation and video context clipping to modern computer vision techniques (e.g. Deepfakes). 
 
+Pior work has tackled the issue of detecting video tampering \emph{from within} the archive by using content-sensitive identifiers (e.g. digests from cryptographic hash functions) at the moment of content ingestion and storing them in permanent ledgers (e.g. blockchains). The same techniques are also employed for combating spoofing, where content provenance is contested; closely relating to issues with authenticity. To the best of our knowledge, little to no work has been done in preventing the ill-usage of created content.
 
-TODO\\
-- contribution 1: distributed patent system with prior art search;\\
-- contribution 2: secure media (e.g. FMVs) using patent grants as proof of novelty;
+In this paper, we contribute with
+
+\begin{enumerate}
+    \item a consensus mechanism for securing genuity, called \emph{Proof of Novelty} (PoN);
+    \item an approach to combat false media content in digital archives with PoN.
+\end{enumerate}
+
+Our design draws inspiration from \emph{Patent System}. We discuss shortcomings of our approach as well as model details in the following sections.
 
 \section{Background}
 \subsection{Patent Systems and Prior Art}
 A patent is a legal document that provides proof of ownership of intellectual property. It is commonly issued by government run agencies to individuals or organizations. The procedure of emission is initiated with a formal request by the party interested in obtaining the patent, called a \emph{patentee}. A \emph{patent clerk}, representing the emitting agency, is then attributed with the task of verifying patentability conditions such as (but not limited to) novelty and non-obviousness of the invention. This is done by collecting evidence of absence of previous similar work, called \emph{Prior Art}.
-
-% What constitutes as Prior Art is often the cause of discourse due to its subjective nature and the centralization of power on patent clerks and agencies.
 
 TODO [patent grants as proof of novelty]
 
