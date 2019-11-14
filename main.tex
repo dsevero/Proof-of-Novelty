@@ -62,7 +62,7 @@ Granting a patent is an attestation of novelty, conditioned on trust in the emit
 \subsection{Blockchains and Smart Contracts}
 A Blockchain is a growing list of ordered records that contain digitally signed transactions. Appending a record to the chain is done by cryptographically hashing the list and adding it to the incoming record. Blockchains are considered immutable, since altering a transaction anywhere in the list would require recomputing the hash of all records that came after it. This data structure often lives on a distributed public peer-to-peer network, where all peers hold a copy of the list and must reach consensus on which incoming blocks should be appended. 
 
-Multiple consensus mechanism have been proposed throughout literature and are usually referred to as Byzantine Agreement Protocols, an homage the famous Byzantine Generals problem. Examples are Proof of Work, Stake and Authority (PoW, PoS, and PoA; respectively).
+Multiple consensus mechanism have been proposed throughout literature and are usually referred to as Byzantine Agreement Protocols, an homage the famous Byzantine Generals problem. Examples are Proof of Work, Stake and Authority (PoW, PoS, and PoA; respectively). Some protocols require partial centralization, such as PoS and PoA. PoW can be fully distributed, but is inefficient in the time it takes to append a new block to the chain and requires a surplus amount of resources.
 
 % Multiple consensus mechanism have been proposed throughout literature such as Proof of Work (PoW), Proof of Stake (PoS) and Proof of Authority (PoA).
 \subsection{Cryptographic Sortition}
