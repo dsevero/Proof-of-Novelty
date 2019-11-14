@@ -82,7 +82,7 @@ Sortition can be used to scale blockchain systems, by forming a committee of pee
 
 % Using \emph{Verifiable Random Functions}, Algorand was able to create a Byzantine Agreement algorithm that scales and replaces PoW.
 \subsection{Content-Addressable Storage}
-Location-addressable systems reference resources based on its location. Examples are everyday systems such as bank accounts, housing addresses, traditional databases. Content-addressable systems use the content itself (usually in the form of a hash) as a locator.
+Location-addressable systems reference resources based on its location. Examples are everyday systems such as bank accounts, housing addresses, traditional databases, and the internet. Content-addressable systems use the content itself (usually in the form of a hash) as a locator.
 
 The \emph{InterPlanetary File System} (IPFS) is a distributed content-addressable storage system tha tis commonly used with blockchain technology and Smart Contracts. Referencing stored content by its cryptographic hash allows IPFS to remove duplicated files, as any two files that are exactly the same will have equal hashes.
 \section{Problem Statement}
@@ -101,6 +101,7 @@ where $(R, s)$ is defined through consensus.
 Accepting $\content^\prime$ can be viewed as the equivalent of emitting a \emph{certificate of novelty}. The objective is to minimize the rate of false positives while maintaining a reasonable rate of acceptance. An owner $\owner$ wishing to prove novelty of $\content$ can do so by showing that $\content \in \ContentSet$ and $\content \xrightarrow{} \owner$ to any entity that trusts the system $\left(R, \simfunc \right)$.
 
 \section{Related Work}
+Previous work has tackled the problem of authenticity (i.e. proving provenance) by securing files on content-addressable storage (e.g. IPFS) with blockchain technology. \cite{hasan2019combating}
 % TODO \\
 % - naive systems\\
 % - ARCHANGEL: TCH needs overfitting; doesn't address discovery\\
@@ -121,6 +122,7 @@ The degree of novelty verified by the system is directly related to the cardinal
 
 Scalability of this solution comes from the fact that $\vert\sF\vert < \vert\sV\vert$, which is possible only if $\sF$ is hidden from the owner $\owner^\prime$. This means that the candidate does not know which values of $\sV$ will be verified by his peers, forcing him to compute $\simfunc(\content,\content^\prime)$ for all values of $\content \in \sV$.
 \subsection{Consensus of Peers Regarding $\sS(\content^\prime, \sV)$}
+
 [Byzantine Consensus (Algorand, WekaCoin)]
 \subsection{Certificate of Novelty}
 Showing that the content-hash of $\content$ is in the distributed archive (i.e. $\content \in \ContentSet$) provides credibility with respect to the novelty of $\content$. Agencies can request that candidates provide PoN on distinct $(R, \simfunc)$ for different tasks. For example, peer-reviewed journals can use arXiv to build a blockchain where researchers submit their written work for tests against plagiarism before submission.
@@ -128,5 +130,7 @@ Showing that the content-hash of $\content$ is in the distributed archive (i.e. 
 \section{Conclusions and Future Work}
 \section*{Acknowledgment}
 We would like to thank Professor Chen Feng for the invitation to participate in the VIRTUAL DESIGN CHALLENGE FOR AUTHENTICATING  AND  PROTECTING  FULL  MOTION  VIDEOS, hosted by Patriot One Technologies Inc. in collaboration with the Blockchain research cluster at The University of British Columbia.
-\section*{References}
+% \section*{References}
+\bibliography{bibliography.bib}{}
+\bibliographystyle{plain}
 \end{document}
