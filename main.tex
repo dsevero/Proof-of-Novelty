@@ -24,8 +24,10 @@ danielsouzasevero@gmail.com}
 
 \maketitle
 
-% \begin{abstract}
-% UNTITLED is a Distributed Patent System design proposal equipped with a Prior Art search mechanism. Patentability requirements are defined through a consensus protocol using Smart Contracts and collaborative training of machine learning algorithms. Removing the patent clerk and shifting the burden of proof of patentability to the patentee, we guarantee scalability and efficiency of the blockchain. The system is highly sensitive to the invention’s medium (e.g. audio files, textual documents) as it defines the class of algorithms employed to calculate similarity, which in turn defines what constitutes as prior art. We show how UNTITLED can be applied to full-motion video archives to protect against tampering and dissemination of false information through Deepfakes.\end{abstract}
+\begin{abstract}
+To be done ...
+% UNTITLED is a Distributed Patent System design proposal equipped with a Prior Art search mechanism. Patentability requirements are defined through a consensus protocol using Smart Contracts and collaborative training of machine learning algorithms. Removing the patent clerk and shifting the burden of proof of patentability to the patentee, we guarantee scalability and efficiency of the blockchain. The system is highly sensitive to the invention’s medium (e.g. audio files, textual documents) as it defines the class of algorithms employed to calculate similarity, which in turn defines what constitutes as prior art. We show how UNTITLED can be applied to full-motion video archives to protect against tampering and dissemination of false information through Deepfakes.
+\end{abstract}
 
 \begin{IEEEkeywords}
 blockchain, patent, smart contracts, prior art, full-motion videos, proof of novelty
@@ -65,15 +67,15 @@ Let $\ContentSet$ represent a collection of content archived in a distributed co
 
 A \emph{similarity measure} on $\ContentSet$ is a function $\simfunc \colon \ContentSet^2 \to \mathbb{R}$ that takes a pair of contents as input and returns a scalar that captures the notion of what constitutes as similar. $s$ can be anything from an Artificial Neural Network to a simple comparison of descriptive statistics.
 
-The system will accept or reject the insertion of a candidate $\content^\prime \notin \ContentSet$ based on the set of similar content $$S(\content^\prime, \threshold) = \left\{ \content \mid \simfunc(\content,\content^\prime) \geq \threshold, \forall \content \in \ContentSet  \right\}$$
+The system will accept or reject the insertion of a candidate $\content^\prime \notin \ContentSet$ based on a subset of similar content $$\sS(\content^\prime, \sV) = \left\{ \simfunc(\content,\content^\prime) \mid \forall \content \in \sV \subseteq \ContentSet \right\}$$
 
 with some rule $R$ 
 
-$$S(\content^\prime, \threshold) \to \text{\{accept, reject\}}$$
+$$\sS(\content^\prime, \sV) \xrightarrow{R} r \in \text{\{accept, reject\}}$$
 
-where $\threshold \in \mathbb{R}$, $R$, and $s$ are defined by the consensus of the network of owners $\OwnerSet$.
+where $\sV$ is chosen by $\OwnerSet$, and $(R, s)$ is defined through consensus.
 
-Accepting $\content^\prime$ can be viewed as the equivalent of emitting a \emph{certificate of novelty}. The objective is to minimize the rate of false positives while maintaining a reasonable rate of acceptance. An owner $\owner$ wishing to prove novelty of $\content$ can do so by showing that $\content \in \ContentSet$ and $\content \xrightarrow{} \owner$ to any entity that trusts the system $\left(R, \threshold, \simfunc \right)$.
+Accepting $\content^\prime$ can be viewed as the equivalent of emitting a \emph{certificate of novelty}. The objective is to minimize the rate of false positives while maintaining a reasonable rate of acceptance. An owner $\owner$ wishing to prove novelty of $\content$ can do so by showing that $\content \in \ContentSet$ and $\content \xrightarrow{} \owner$ to any entity that trusts the system $\left(R, \simfunc \right)$.
 
 \section{Related Work}
 % TODO \\
@@ -86,9 +88,7 @@ Accepting $\content^\prime$ can be viewed as the equivalent of emitting a \emph{
 \section{Design Proposal}
 An overview of the system is presented through narrative. Details are addressed in later subsections. 
 \subsection{Overview}\label{overview}
-Consider a credible archive $\ContentSet$ of similar content, with content-addressable hashes secured on a smart contract enabled blockchain, an associated similarity measure $\simfunc$, and an acceptance/rejection rule $R$. For example, arXiv articles stored on IPFS with community defined $s$ and $R$ secured by Ethereum. Note that credibility is a consensus amongst peers and not an intrinsic property of the archive (e.g. scholarly peer-reviewed venues). An owner $\owner^\prime$,  wishing to prove novelty of content $\content^\prime \notin \ContentSet$, makes a transaction on the blockchain and receives a random subset of content-hashes of elements $\content \in \sV \subseteq \ContentSet$. The owner now uses $\simfunc$ to calculate the similarity of $\content^\prime$ with the elements of $\sV$
-$$\sS(\content^\prime, \sV) = \left\{ \simfunc(\content,\content^\prime) \mid \forall \content \in \sV \right\}$$
-and submits the calculations back to the smart contract for evaluation. Using cryptographic sortition, the smart contract chooses a random committee that is tasked with off-chain verification of a subset of the results, $\sS(\content^\prime, \sF \subseteq \sV)$. Consensus is reached by the committee regarding the legitimacy of $\sS(\content^\prime, \sV)$, and $\content^\prime$ is accepted or rejected into the archive based on the rule $R$.
+Consider a credible archive $\ContentSet$ of similar content, with content-addressable hashes secured on a smart contract enabled blockchain, an associated similarity measure $\simfunc$, and an acceptance/rejection rule $R$. For example, arXiv articles stored on IPFS with community defined $s$ and $R$ secured by Ethereum. Note that credibility is a consensus amongst peers and not an intrinsic property of the archive (e.g. scholarly peer-reviewed venues). An owner $\owner^\prime$,  wishing to prove novelty of content $\content^\prime \notin \ContentSet$, makes a transaction on the blockchain and receives a random subset of content-hashes of elements $\content \in \sV \subseteq \ContentSet$. The owner now uses $\simfunc$ to calculate the similarity of $\content^\prime$ with the elements of $\sV$ (i.e. $\sS(\content^\prime, \sV)$) and submits the calculations back to the smart contract for evaluation. Using cryptographic sortition, the smart contract chooses a random committee that is tasked with off-chain verification of a subset of the results, $\sS(\content^\prime, \sF \subseteq \sV)$. Consensus is reached by the committee regarding the legitimacy of $\sS(\content^\prime, \sV)$, and $\content^\prime$ is accepted or rejected into the archive based on the rule $R$.
 
 % The burden of proof of novelty lies with $\owner^\prime$, whom must
 % $\sH = \left\{ h(\content) \mid \forall \content \in \sV \subseteq \ContentSet \right\}$.
@@ -97,10 +97,10 @@ and submits the calculations back to the smart contract for evaluation. Using cr
 The degree of novelty verified by the system is directly related to the cardinality (i.e. number of elements) of $\sV$, represented by $\vert\sV\vert$. Making $\sV = \ContentSet$ will guarantee that all files in the archive are compared against the candidate content $\content^\prime$, but will make the computation of $\sS(\content^\prime, \sV)$ resource intensive. Similarly, raising $\vert\sF\vert$ decreases the probability that an owner can successfully manipulate the values of $\sS(\content^\prime, \sV)$, but requires more computational power during the verification process by network peers.
 
 Scalability of this solution comes from the fact that $\vert\sF\vert < \vert\sV\vert$, which is possible only if $\sF$ is hidden from the owner $\owner^\prime$. This means that the candidate does not know which values of $\sV$ will be verified by his peers, forcing him to compute $\simfunc(\content,\content^\prime)$ for all values of $\content \in \sV$.
+\subsection{Consensus of Peers Regarding $\sS(\content^\prime, \sV)$}
+[Byzantine Consensus (Algorand, WekaCoin)]
 \subsection{Proof of Novelty}
 \subsection{Similarity Measure ($s$)}
-
-
 \section{Application to Full-motion Video Archives}
 \section{Conclusions and Future Work}
 \section*{Acknowledgment}
