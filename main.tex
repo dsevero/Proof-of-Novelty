@@ -62,9 +62,12 @@ Granting a patent is an attestation of novelty, conditioned on trust in the emit
 \subsection{Blockchains and Smart Contracts}
 A Blockchain is a growing list of ordered records that contain digitally signed transactions. Appending a record to the chain is done by cryptographically hashing the list and adding it to the incoming record. Blockchains are considered immutable, since altering a transaction anywhere in the list would require recomputing the hash of all records that came after it. This data structure often lives on a distributed public peer-to-peer network, where all peers hold a copy of the list and must reach consensus on which incoming blocks should be appended. 
 
-Multiple consensus mechanism have been proposed throughout literature and are usually referred to as Byzantine Agreement Protocols, an homage the famous Byzantine Generals problem. Examples are Proof of Work, Stake and Authority (PoW, PoS, and PoA; respectively). Some protocols require partial centralization, such as PoS and PoA. PoW can be fully distributed, but is inefficient in the time it takes to append a new block to the chain and requires a surplus amount of resources.
+Multiple consensus mechanism have been proposed throughout literature and are usually referred to as Byzantine Agreement Protocols, an homage the famous Byzantine Generals problem. Examples are Proof of Work, Stake and Authority (PoW, PoS, and PoA; respectively). Some protocols require partial centralization to be secure, such as PoS and PoA. PoW can be fully distributed, but is inefficient in the time it takes to append a new block to the chain and requires a surplus amount of resources.
 
-% Multiple consensus mechanism have been proposed throughout literature such as Proof of Work (PoW), Proof of Stake (PoS) and Proof of Authority (PoA).
+A \emph{Smart Contract} usually refers to a computer program that is executed collaboratively on a blockchain. Consensus on the state of execution of the program is reached through the Byzantine Agreements previously mentioned. The name comes from its usage in enforcing terms of agreements between parties in a way that doesn't require trust in a centralized moderator, such as a government agency.
+
+The \emph{Ethereum Virtual Machine} is a distributed blockchain system that implements a set of machine-level instructions similar to a general purpose computer. It supports Smart Contracts written in languages such as Solidity, Vyper and LLL. Programs running on the EVM (essentially a Smart Contract) can be used as the back-end (i.e. server-side) for software applications called \emph{Decentralized Apps}.
+
 \subsection{Cryptographic Sortition}
 Sortition is the act of randomly selecting elements of a group to form a committee. It is usually associated with political systems as an alternative to elections, where representatives are selected by sampling from the population of eligible citizens. For element $i$, the probability $p_i$ of being selected is proportional to some non-negative real valued weight $\omega_i$, therefore $p_i = \omega_i/\sum_i\omega_i$. Choosing equal weights (i.e. $\omega_i = \omega_j; \forall i,j$) results in a uniform distribution, where every element has the same chance of being selected.
 
@@ -72,6 +75,7 @@ Sortition can be used to scale blockchain systems, by forming a committee of pee
 
 % Using \emph{Verifiable Random Functions}, Algorand was able to create a Byzantine Agreement algorithm that scales and replaces PoW.
 \subsection{Content-Addressable Storage}
+House numbering, World Wide Web, and traditional databases are all examples of location-based systems. A content
 \section{Problem Statement}
 Let $\ContentSet$ represent a collection of content archived in a distributed content-addressable storage system such as IPFS. For each content $\content \in \ContentSet$ there exists some owner $\owner \in \OwnerSet$ such that the mapping $\content \to \owner$ is one-to-one but the inverse $\owner \to \content$ is one-to-many. In other words, one owner can have multiple contents, but each content has a unique owner. 
 
