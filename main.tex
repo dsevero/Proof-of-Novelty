@@ -59,6 +59,13 @@ A patent is a legal document that provides proof of ownership of intellectual pr
 Granting a patent is an attestation of novelty, conditioned on trust in the emitting agency. An improper Prior Art search can lead to erroneous conclusions of novelty regarding the patentee's invention. 
 
 \subsection{Similarity Measures}
+A similarity measure is any function that quantifies the degree of similarity between objects. For example, the Jaccard index measures similarity between sets $\sA$ and $\sB$, by comparing the number of common elements. Formally, it is the ratio between the the intersection and union, and varies between 0 and 1; $J(\sA, \sB) = \vert\sA\cap\sB\vert/\vert\sA\cup\sB\vert$. These metrics are common in applications regarding information retrieval (e.g. search systems) and recommendation systems.
+
+Distance functions $d$ are common throughout literature and can be converted into a similarity measure by a simple transformation such as $d \to \frac{1}{1+d}$.
+
+Both distance and similarity measures are sensitive to their domain. For example, the Jaccard index previously mentioned can not be used directly on real valued data (what would $J(5, 2.4)$ mean?). There is a vast amount of literature addressing metrics for text, full-motion videos and audio applications. The field of \emph{Similarity Learning} is concerned with the task of learning similarity and distance functions through the usage of labeled examples and Machine Learning techniques (i.e. Supervised Machine Learning).
+ 
+
 \subsection{Blockchains and Smart Contracts}
 A Blockchain is a growing list of ordered records that contain digitally signed transactions. Appending a record to the chain is done by cryptographically hashing the list and adding it to the incoming record. Blockchains are considered immutable, since altering a transaction anywhere in the list would require recomputing the hash of all records that came after it. This data structure often lives on a distributed public peer-to-peer network, where all peers hold a copy of the list and must reach consensus on which incoming blocks should be appended. 
 
@@ -75,7 +82,6 @@ Sortition can be used to scale blockchain systems, by forming a committee of pee
 
 % Using \emph{Verifiable Random Functions}, Algorand was able to create a Byzantine Agreement algorithm that scales and replaces PoW.
 \subsection{Content-Addressable Storage}
-House numbering, World Wide Web, and traditional databases are all examples of location-based systems. A content
 \section{Problem Statement}
 Let $\ContentSet$ represent a collection of content archived in a distributed content-addressable storage system such as IPFS. For each content $\content \in \ContentSet$ there exists some owner $\owner \in \OwnerSet$ such that the mapping $\content \to \owner$ is one-to-one but the inverse $\owner \to \content$ is one-to-many. In other words, one owner can have multiple contents, but each content has a unique owner. 
 
