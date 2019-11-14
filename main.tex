@@ -61,6 +61,11 @@ Granting a patent is an attestation of novelty, conditioned on trust in the emit
 \subsection{Similarity Measures}
 \subsection{Blockchains and Smart Contracts}
 \subsection{Cryptographic Sortition}
+Sortition is the act of randomly selecting elements of a group to form a committee. It is usually associated with political systems as an alternative to elections, where representatives are selected by sampling from the population of eligible citizens. For element $i$, the probability $p_i$ of being selected is proportional to some non-negative real valued weight $\omega_i$, therefore $p_i = \omega_i/\sum_i\omega_i$. Choosing equal weights (i.e. $\omega_i = \omega_j; \forall i,j$) results in a uniform distribution, where every element has the same chance of being selected.
+
+Sortition can be used to scale blockchain systems, by forming a committee of peers to reach consensus on new blocks; completely replacing PoW. Although promising, a naive implementation can cause security concerns due to interactions between committee members and their exposure to malicious agents. Algorand created a Byzantine agreement protocol which forms committees without the need of interactions or exposure, using \emph{Cryptographic Sortition}. Any peer holding a private key can verify and prove self-membership in the committee using a \emph{Verifiable Random Function}.
+
+% Using \emph{Verifiable Random Functions}, Algorand was able to create a Byzantine Agreement algorithm that scales and replaces PoW.
 \subsection{Content-Addressable Storage}
 \section{Problem Statement}
 Let $\ContentSet$ represent a collection of content archived in a distributed content-addressable storage system such as IPFS. For each content $\content \in \ContentSet$ there exists some owner $\owner \in \OwnerSet$ such that the mapping $\content \to \owner$ is one-to-one but the inverse $\owner \to \content$ is one-to-many. In other words, one owner can have multiple contents, but each content has a unique owner. 
