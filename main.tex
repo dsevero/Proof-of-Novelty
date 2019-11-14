@@ -9,32 +9,33 @@
 \usepackage{xcolor}
 \def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
     T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+\input{definitions.tex}
 \begin{document}
 
 \title{Proof of Novelty\\
-\thanks{This paper was written for the VIRTUAL DESIGN CHALLENGE FOR AUTHENTICATING AND PROTECTING FULL MOTION VIDEOS: \url{https://blockchain.ubc.ca/news/virtual-design-challenge-authenticating-and-protecting-full-motion-videos}}
+\thanks{This short paper was written for the VIRTUAL DESIGN CHALLENGE FOR AUTHENTICATING AND PROTECTING FULL MOTION VIDEOS: \url{https://blockchain.ubc.ca/news/virtual-design-challenge-authenticating-and-protecting-full-motion-videos}}
 }
 
 \author{\IEEEauthorblockN{Daniel Severo}
-\IEEEauthorblockA{\textit{Independent Researcher} \\
+\IEEEauthorblockA{\textit{Independent Scientist} \\
 São Paulo, Brazil \\
 danielsouzasevero@gmail.com}
 }
 
 \maketitle
 
-\begin{abstract}
-UNTITLED is a Distributed Patent System design proposal equipped with a Prior Art search mechanism. Patentability requirements are defined through a consensus protocol using Smart Contracts and collaborative training of machine learning algorithms. Removing the patent clerk and shifting the burden of proof of patentability to the patentee, we guarantee scalability and efficiency of the blockchain. The system is highly sensitive to the invention’s medium (e.g. audio files, textual documents) as it defines the class of algorithms employed to calculate similarity, which in turn defines what constitutes as prior art. We show how UNTITLED can be applied to full-motion video archives to protect against tampering and dissemination of false information through Deepfakes.\end{abstract}
+% \begin{abstract}
+% UNTITLED is a Distributed Patent System design proposal equipped with a Prior Art search mechanism. Patentability requirements are defined through a consensus protocol using Smart Contracts and collaborative training of machine learning algorithms. Removing the patent clerk and shifting the burden of proof of patentability to the patentee, we guarantee scalability and efficiency of the blockchain. The system is highly sensitive to the invention’s medium (e.g. audio files, textual documents) as it defines the class of algorithms employed to calculate similarity, which in turn defines what constitutes as prior art. We show how UNTITLED can be applied to full-motion video archives to protect against tampering and dissemination of false information through Deepfakes.\end{abstract}
 
 \begin{IEEEkeywords}
-blockchain, patent, machine learning, smart contracts, prior art, full-motion videos
+blockchain, patent, smart contracts, prior art, full-motion videos, proof of novelty
 \end{IEEEkeywords}
 
 \section{Introduction}
 
 Consider the case of decision making based on evidence presented in the form of modern media files (e.g. full-motion videos, textual documents, audio files), such as court trials and journalism. Guaranteeing content genuity (i.e. authenticity) is crucial, and failing to do so risks undermining the legitimacy of the decision maker. For example, journalists fact check their findings before publishing news articles; patent clerks exhaustively gather evidence of absence of prior art before emitting patent certificates; and media archives (e.g. YouTube) protects artists by taking down copyright-infringing content. Scholarly peer review systems also share this characteristic, where a reviewer is tasked with evaluating the claims made in an academic paper during the process of submission to a conference or journal. 
 
-    The central concepts underlying the aforementioned examples are \emph{novelty} and \emph{authenticity} (i.e. how new and real something is, respectively). What constitutes as novel is often the cause of discourse due to its subjective nature and the trust bestowed upon a centralized agent to discriminate on what is, and what is is not, genuinely novel. More recently, a new issue has emerged due to the proliferation of digital content in the internet age; verifying novelty against large archives. Even if the definition of novelty can be agreed upon by interested parties, exhaustively comparing candidate and existing contents can be computationally intractable due to large data volumes (e.g. 500 hours of video images are uploaded to YouTube every minute). Defining and securing authenticity is comparably more mature and has benefited considerably in recent years with the advent of Digital Signatures.
+The central concepts underlying the aforementioned examples are \emph{novelty} and \emph{authenticity}. An item is deemed authentic when its provenance is indisputable. What constitutes as novel is often the cause of discourse due to its subjective nature and the trust bestowed upon a centralized agent to discriminate on what is, and what is is not, genuinely novel. More recently, a new issue has emerged due to the proliferation of digital content in the internet age; verifying novelty against large archives. Even if the definition of novelty can be agreed upon by interested parties, exhaustively comparing candidate and existing contents can be computationally intractable due to large data volumes (e.g. 500 hours of video images are uploaded to YouTube every minute). Defining and securing authenticity is comparably more mature and has benefited considerably in recent years with the advent of Digital Signatures.
 
 In the case of media archives, checking for novelty prior to acceptance can be seen as a way of preserving the moral integrity of \emph{currently} archived content. A malicious agent can attack content by submitting a modified version and leverage social media as a vector for propagating false information. Complexity of attacks range from audio manipulation and video context clipping to modern computer vision techniques (e.g. Deepfakes). 
 
@@ -51,22 +52,55 @@ Our design draws inspiration from \emph{Patent System}. We discuss shortcomings 
 
 \section{Background}
 \subsection{Patent Systems and Prior Art}
-A patent is a legal document that provides proof of ownership of intellectual property. It is commonly issued by government run agencies to individuals or organizations. The procedure of emission is initiated with a formal request by the party interested in obtaining the patent, called a \emph{patentee}. A \emph{patent clerk}, representing the emitting agency, is then attributed with the task of verifying patentability conditions such as (but not limited to) novelty and non-obviousness of the invention. This is done by collecting evidence of absence of previous similar work, called \emph{Prior Art}.
+A patent is a legal document that provides proof of ownership of intellectual property (IP). It is commonly issued by government run agencies to individuals or organizations. Its main function is to secure legal exclusivity regarding sales, production and distribution of the IP to the owner. The procedure of emission is initiated with a formal request by the party interested in obtaining the patent, called a \emph{patentee}. A \emph{patent clerk}, representing the emitting agency, is then attributed with the task of verifying patentability conditions such as (but not limited to) novelty and non-obviousness of the invention. This is done by collecting evidence of absence of previous similar work, called \emph{Prior Art}. Searching is done against niche databases specialized in storing technical documents.
 
-TODO [patent grants as proof of novelty]
+Granting a patent is an attestation of novelty, conditioned on trust in the emitting agency. An improper Prior Art search can lead to erroneous conclusions of novelty regarding the patentee's invention. 
 
+\subsection{Similarity Measures}
 \subsection{Blockchains and Smart Contracts}
-\subsection{Collaborative Machine Learning}
+\subsection{Cryptographic Sortition}
+\subsection{Content-Addressable Storage}
 \section{Problem Statement}
+Let $\ContentSet$ represent a collection of content archived in a distributed content-addressable storage system such as IPFS. For each content $\content \in \ContentSet$ there exists some owner $\owner \in \OwnerSet$ such that the mapping $\content \to \owner$ is one-to-one but the inverse $\owner \to \content$ is one-to-many. In other words, one owner can have multiple contents, but each content has a unique owner. 
+
+A \emph{similarity measure} on $\ContentSet$ is a function $\simfunc \colon \ContentSet^2 \to \mathbb{R}$ that takes a pair of contents as input and returns a scalar that captures the notion of what constitutes as similar. $s$ can be anything from an Artificial Neural Network to a simple comparison of descriptive statistics.
+
+The system will accept or reject the insertion of a candidate $\content^\prime \notin \ContentSet$ based on the set of similar content $$S(\content^\prime, \threshold) = \left\{ \content \mid \simfunc(\content,\content^\prime) \geq \threshold, \forall \content \in \ContentSet  \right\}$$
+
+with some rule $R$ 
+
+$$S(\content^\prime, \threshold) \to \text{\{accept, reject\}}$$
+
+where $\threshold \in \mathbb{R}$, $R$, and $s$ are defined by the consensus of the network of owners $\OwnerSet$.
+
+Accepting $\content^\prime$ can be viewed as the equivalent of emitting a \emph{certificate of novelty}. The objective is to minimize the rate of false positives while maintaining a reasonable rate of acceptance. An owner $\owner$ wishing to prove novelty of $\content$ can do so by showing that $\content \in \ContentSet$ and $\content \xrightarrow{} \owner$ to any entity that trusts the system $\left(R, \threshold, \simfunc \right)$.
+
 \section{Related Work}
-TODO \\
-- naive systems\\
-- ARCHANGEL: TCH needs overfitting; doesn't address discovery\\
-- Bernstein\\
-- Mediachain\\
-- Locality-sensitive hashing\\
-- https://arxiv.org/abs/1901.03136\\
+% TODO \\
+% - naive systems\\
+% - ARCHANGEL: TCH needs overfitting; doesn't address discovery\\
+% - Bernstein\\
+% - Mediachain\\
+% - Locality-sensitive hashing\\
+% - https://arxiv.org/abs/1901.03136\\
 \section{Design Proposal}
+An overview of the system is presented through narrative. Details are addressed in later subsections. 
+\subsection{Overview}\label{overview}
+Consider a credible archive $\ContentSet$ of similar content, with content-addressable hashes secured on a smart contract enabled blockchain, an associated similarity measure $\simfunc$, and an acceptance/rejection rule $R$. For example, arXiv articles stored on IPFS with community defined $s$ and $R$ secured by Ethereum. Note that credibility is a consensus amongst peers and not an intrinsic property of the archive (e.g. scholarly peer-reviewed venues). An owner $\owner^\prime$,  wishing to prove novelty of content $\content^\prime \notin \ContentSet$, makes a transaction on the blockchain and receives a random subset of content-hashes of elements $\content \in \sV \subseteq \ContentSet$. The owner now uses $\simfunc$ to calculate the similarity of $\content^\prime$ with the elements of $\sV$
+$$\sS(\content^\prime, \sV) = \left\{ \simfunc(\content,\content^\prime) \mid \forall \content \in \sV \right\}$$
+and submits the calculations back to the smart contract for evaluation. Using cryptographic sortition, the smart contract chooses a random committee that is tasked with off-chain verification of a subset of the results, $\sS(\content^\prime, \sF \subseteq \sV)$. Consensus is reached by the committee regarding the legitimacy of $\sS(\content^\prime, \sV)$, and $\content^\prime$ is accepted or rejected into the archive based on the rule $R$.
+
+% The burden of proof of novelty lies with $\owner^\prime$, whom must
+% $\sH = \left\{ h(\content) \mid \forall \content \in \sV \subseteq \ContentSet \right\}$.
+
+\subsection{Choosing $\sV$ and $\sF$}
+The degree of novelty verified by the system is directly related to the cardinality (i.e. number of elements) of $\sV$, represented by $\vert\sV\vert$. Making $\sV = \ContentSet$ will guarantee that all files in the archive are compared against the candidate content $\content^\prime$, but will make the computation of $\sS(\content^\prime, \sV)$ resource intensive. Similarly, raising $\vert\sF\vert$ decreases the probability that an owner can successfully manipulate the values of $\sS(\content^\prime, \sV)$, but requires more computational power during the verification process by network peers.
+
+Scalability of this solution comes from the fact that $\vert\sF\vert < \vert\sV\vert$, which is possible only if $\sF$ is hidden from the owner $\owner^\prime$. This means that the candidate does not know which values of $\sV$ will be verified by his peers, forcing him to compute $\simfunc(\content,\content^\prime)$ for all values of $\content \in \sV$.
+\subsection{Proof of Novelty}
+\subsection{Similarity Measure ($s$)}
+
+
 \section{Application to Full-motion Video Archives}
 \section{Conclusions and Future Work}
 \section*{Acknowledgment}
