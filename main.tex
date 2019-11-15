@@ -140,6 +140,14 @@ A single similarity function is not expected to perform well for all types of vi
 Videos with long duration (i.e. tens of minutes) can be broken down with scene detection algorithms, such as in \cite{bui2019archangel}. This framework can be extended to sample frames or scenes from a candidate video, and novelty can be secured stochastically.
 
 \section{Conclusions and Future Work}
+In this paper we presented a design proposal for a Smart Contract compatible blockchain that can secure \emph{novelty} of currently existing archives. Our work can scale by leveraging a cryptographic sortition algorithm to form a committee of validators during insertion of new content. It is easily applicable to full-motion videos, audio files, textual documents and any other type of content for which a similarity function can be defined. Through statistical hypothesis testing, guarantees can be made with respect to the degree of novelty (within the scope of the archive).
+
+There are multiple points of improvement that future work can tackle, such as:
+\begin{itemize}
+    \item implementing and running experiments on Smart Contract blockchains such as Ethereum;
+    \item applying decentralized and collaborative machine learning to progressively update a similarity function \cite{harris2019decentralized};
+    \item investigating statistical hypothesis tests and guarantees for different content and similarity functions.
+\end{itemize}
 \section*{Acknowledgment}
 We would like to thank Professor Chen Feng for the invitation to participate in the VIRTUAL DESIGN CHALLENGE FOR AUTHENTICATING  AND  PROTECTING  FULL  MOTION  VIDEOS, hosted by Patriot One Technologies Inc. in collaboration with the Blockchain research cluster at The University of British Columbia.
 \bibliography{bibliography.bib}{}
