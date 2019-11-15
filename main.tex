@@ -133,6 +133,12 @@ Notice that the burden of proof of novelty is bestowed upon the owner of the can
 
 
 \section{Application to Full-motion Video Archives}
+An advantage of PoN is that changing the content type (e.g. full-motion videos, audio tracks, images) only requires us to choose a different similarity function. Each content type has a unique property that usually implies different types of techniques for the same task. For example, although full-motion videos are a sequence of image frames, the similarity between sequential frames allows us to use specific compression algorithms that would not perform as well on a set of random images \cite{le1991mpeg}. Literature in Similarity Learning for full-motion videos as well as Near-Video Duplicate Detection \cite{li2019fast} has evolved considerably with the use of Convolutional and Recursive Neural Network \cite{saadatpanah2019adversarial} and can be explored to find candidate similarity functions.
+
+A single similarity function is not expected to perform well for all types of videos. The novelty certificate can be segmented by topic (e.g. famous speeches, car collisions) and the entity wishing to validate a candidate video can specify which certificate is needed. 
+
+Videos with long duration (i.e. tens of minutes) can be broken down with scene detection algorithms, such as in \cite{bui2019archangel}. This framework can be extended to sample frames or scenes from a candidate video, and novelty can be secured stochastically.
+
 \section{Conclusions and Future Work}
 \section*{Acknowledgment}
 We would like to thank Professor Chen Feng for the invitation to participate in the VIRTUAL DESIGN CHALLENGE FOR AUTHENTICATING  AND  PROTECTING  FULL  MOTION  VIDEOS, hosted by Patriot One Technologies Inc. in collaboration with the Blockchain research cluster at The University of British Columbia.
