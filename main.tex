@@ -118,21 +118,24 @@ An overview of the system is presented through narrative. Details are addressed 
 \subsection{Overview}\label{overview}
 Consider a credible archive $\ContentSet$ of similar content, with content-addressable hashes secured on a smart contract enabled blockchain, an associated similarity measure $\simfunc$, and an acceptance/rejection rule $R$. For example, arXiv articles stored on IPFS with community defined $s$ and $R$ secured by Ethereum. Note that credibility is a consensus amongst peers and not an intrinsic property of the archive (e.g. scholarly peer-reviewed venues). An owner $\owner^\prime$,  wishing to prove novelty of content $\content^\prime \notin \ContentSet$, makes a transaction on the blockchain and receives a random subset of content-hashes of elements $\content \in \sV \subseteq \ContentSet$. The owner now uses $\simfunc$ to calculate the similarity of $\content^\prime$ with the elements of $\sV$ (i.e. $\sS(\content^\prime, \sV)$) and submits the calculations back to the smart contract for evaluation. Using cryptographic sortition, the smart contract chooses a random committee that is tasked with off-chain verification of a subset of the results, $\sS(\content^\prime, \sF \subseteq \sV)$. Consensus is reached by the committee regarding the legitimacy of $\sS(\content^\prime, \sV)$, and $\content^\prime$ is accepted or rejected into the archive based on the rule $R$.
 
-% The burden of proof of novelty lies with $\owner^\prime$, whom must
-% $\sH = \left\{ h(\content) \mid \forall \content \in \sV \subseteq \ContentSet \right\}$.
-
 \subsection{Choosing $\sV$ and $\sF$}
 The degree of novelty verified by the system is directly related to the cardinality (i.e. number of elements) of $\sV$, represented by $\vert\sV\vert$. Making $\sV = \ContentSet$ will guarantee that all files in the archive are compared against the candidate content $\content^\prime$, but will make the computation of $\sS(\content^\prime, \sV)$ resource intensive. Similarly, raising $\vert\sF\vert$ decreases the probability that an owner can successfully manipulate the values of $\sS(\content^\prime, \sV)$, but requires more computational power during the verification process by network peers.
 
-Scalability of this solution comes from the fact that $\vert\sF\vert < \vert\sV\vert$, which is possible only if $\sF$ is hidden from the owner $\owner^\prime$. This means that the candidate does not know which values of $\sV$ will be verified by his peers, forcing him to compute $\simfunc(\content,\content^\prime)$ for all values of $\content \in \sV$.
-% \subsection{Consensus of Peers Regarding $\sS(\content^\prime, \sV)$}
+Scalability of this solution comes from the fact that $\vert\sF\vert < \vert\sV\vert$, which is possible only if $\sF$ is hidden from the owner $\owner^\prime$. This means that the candidate does not know which values of $\sV$ will be verified by his peers, forcing him to compute $\simfunc(\content,\content^\prime)$ for all values of $\content \in \sV$. The probability of randomly guessing which elements are in $\sF$ can be made as low as required.
+
+\subsection{Consensus of Peers Regarding $\sS(\content^\prime, \sV)$}
+Using only $\sS(\content^\prime, \sF \subseteq \sV)$, the peers must infer if $\sS(\content^\prime, \sV)$ is valid. Inference through statistical hypothesis testing \cite{newey1994large} can be leveraged to decide if candidate content is novel.
+
 \subsection{Certificate of Novelty}
 Showing that the content-hash of $\content$ is in the distributed archive (i.e. $\content \in \ContentSet$) provides credibility with respect to the novelty of $\content$. Agencies can request that candidates provide PoN on distinct $(R, \simfunc)$ for different tasks. For example, peer-reviewed journals can use arXiv to build a blockchain where researchers submit their written work for tests against plagiarism before submission.
+
+Notice that the burden of proof of novelty is bestowed upon the owner of the candidate content, and not the the network. This design can also provide varying levels of proof. For example, a content validated against a larger value of $\vert\sF\vert$ will result in a higher confidence of novelty. This can be extended to the point where there are varying or even continuous levels of confidence, where the candidate owner can resubmit the same content to the blockchain when demanded by a third party that trusts the system.
+
+
 \section{Application to Full-motion Video Archives}
 \section{Conclusions and Future Work}
 \section*{Acknowledgment}
 We would like to thank Professor Chen Feng for the invitation to participate in the VIRTUAL DESIGN CHALLENGE FOR AUTHENTICATING  AND  PROTECTING  FULL  MOTION  VIDEOS, hosted by Patriot One Technologies Inc. in collaboration with the Blockchain research cluster at The University of British Columbia.
-% \section*{References}
 \bibliography{bibliography.bib}{}
 \bibliographystyle{plain}
 \end{document}
