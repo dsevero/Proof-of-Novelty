@@ -5,7 +5,7 @@
 
 
 [![OpenReview](http://img.shields.io/badge/OpenReview-BJlfBONxnS-B31B1B.svg)](https://openreview.net/forum?id=BJlfBONxnS)
-[![DOI](https://zenodo.org/badge/221163360.svg)](https://zenodo.org/badge/latestdoi/221163360)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.3546276.svg)](https://doi.org/10.5281/zenodo.3546276)
 [![Paper](https://img.shields.io/badge/paper-pdf-2B917B.svg)](https://nbviewer.jupyter.org/github/dsevero/Proof-of-Novelty/blob/master/Proof-of-Novelty.pdf)
 </div>
 
@@ -13,13 +13,12 @@ We propose a design for securing novelty of archived content in distributed ledg
 
 ## Citation
 ```
-@article{daniel severo_2019, 
- title={dsevero/Proof-of-Novelty zenodo}, 
- DOI={10.5281/zenodo.3546267}, 
- abstractNote={A distributed consensus mechanism for securing content novelty: Proof of Novelty.}, 
- publisher={Zenodo}, 
- author={Daniel Severo}, 
- year={2019}, 
- month={Nov}
-}
+@article{daniel severo_2019,
+    title={Proof of Novelty}, 
+    DOI={10.5281/zenodo.3546276}, 
+    abstractNote={A distributed consensus mechanism for securing content novelty: Proof of Novelty.}, 
+    publisher={Zenodo}, 
+    author={Daniel Severo}, 
+    year={2019}, 
+    month={Nov}}
 ```
