@@ -13,12 +13,12 @@ We propose a design for securing novelty of archived content in distributed ledg
 
 ## Citation
 ```
-@misc{severo_2019, 
-   title={Proof of Novelty}, 
-   url={https://figshare.com/articles/Proof_of_Novelty/10324883/1}, 
-   DOI={10.6084/m9.figshare.10324883.v1}, 
-   publisher={figshare}, 
-   author={Severo, Daniel}, 
-   year={2019}, 
-   month={Nov}}
+@article{Severo2019,
+  author = "Daniel Severo",
+  title = "{Proof of Novelty}",
+  year = "2019",
+  month = "11",
+  url = "https://figshare.com/articles/Proof_of_Novelty/10324883",
+  doi = "10.6084/m9.figshare.10324883.v1"
+}
 ```
