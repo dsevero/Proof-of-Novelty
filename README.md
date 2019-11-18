@@ -14,11 +14,12 @@ We propose a design for securing novelty of archived content in distributed ledg
 ## Citation
 ```
 @article{daniel severo_2019,
-    title={Proof of Novelty}, 
-    DOI={10.5281/zenodo.3546276}, 
-    abstractNote={A distributed consensus mechanism for securing content novelty: Proof of Novelty.}, 
-    publisher={Zenodo}, 
-    author={Daniel Severo}, 
-    year={2019}, 
-    month={Nov}}
+    title={Proof of Novelty},
+    DOI={10.5281/zenodo.3546276},
+    abstractNote={A distributed consensus mechanism for securing content novelty: Proof of Novelty.},
+    publisher={Zenodo},
+    author={Daniel Severo},
+    year={2019},
+    month={Nov}
+}
 ```
