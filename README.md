@@ -17,7 +17,6 @@ We propose a design for securing novelty of archived content in distributed ledg
    title={Proof of Novelty}, 
    url={https://figshare.com/articles/Proof_of_Novelty/10324883/1}, 
    DOI={10.6084/m9.figshare.10324883.v1}, 
-   abstractNote={We propose a design for securing novelty of archived content in distributed ledgers, called Proof of Novelty. What constitutes as novel is decided through a consensus mechanism together with a similarity function, which is selected according to the content type (e.g. full-motion videos, textual documents). Scalability is guaranteed by forming a validation committee with cryptographic sortition, which use statistical hypothesis testing to decide on the probability of a content being novel or not. The system can trade-off computational with statistical performance by manipulating parameters. We discuss the usage of this design to secure the novelty of full-motion videos and end with a proposal of future lines of research that can extend the systems capabilities.}, 
    publisher={figshare}, 
    author={Severo, Daniel}, 
    year={2019}, 
