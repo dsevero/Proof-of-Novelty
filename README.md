@@ -22,3 +22,5 @@ We propose a design for securing novelty of archived content in distributed ledg
   doi = "10.6084/m9.figshare.10324883.v1"
 }
 ```
+
+This short paper was written for the [VIRTUAL DESIGN CHALLENGE FOR AUTHENTICATING AND PROTECTING FULL MOTION VIDEOS](https://blockchain.ubc.ca/news/virtual-design-challenge-authenticating-and-protecting-full-motion-videos).
