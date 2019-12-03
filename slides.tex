@@ -54,6 +54,8 @@
             \item[\faGithub] \href{https://github.com/dsevero}{dsevero}
             \item[$\rightarrow$] \href{https://dsevero.com}{dsevero.com}
         \end{enumerate}
+        \vfill
+        \tiny For references, see the original paper at \href{https://github.com/dsevero/Proof-of-Novelty}{github.com/dsevero/Proof-of-Novelty}
     \end{frame}
 }
 
@@ -128,76 +130,49 @@ Target audience: undergraduate students in STEM with a basic knowledge of Blockc
 
 \section{Proof of Novelty}
 \subsection{Overview}
-\begin{frame}{Proof of Novelty}
+\begin{frame}[b]{Proof of Novelty}
     \begin{enumerate}
-        \item[1] The owner of content $\content$ wishes to prove to us it is trustworthy.
-        \item[2] A collection of similar content $\ContentSet$ exists and is secured on a blockchain with content-addressable hashes.
+        \item<only@1>[1] The owner of content $\content$ wishes to prove to us it is trustworthy.
+        \item<only@1>[2] A collection of similar content $\ContentSet$ exists and is secured on a blockchain with content-addressable hashes.
+        \item<only@2>[3] The owner makes a transaction on the blockchain and receives a random subset of content-hashes $\sV \subseteq \ContentSet$.
+        \item<only@2>[4] The owner calculates the similarity of $\content$ with the elements of $\sV$, using a predefined similarity measure.
+        \item<only@3>[5] The blockchain chooses a random committee of peers that verify a subset of the results, $\sF \subseteq \sV$.
+        \item<only@4>[6] Consensus is reached by the committee regarding the legitimacy of the owner's calculations, and $c$ is accepted or rejected into $\ContentSet$.
     \end{enumerate}
-    \vfill
-    \includegraphics[width=1.0\textwidth]{assets/pon-diagram-0.pdf}
-\end{frame}
+    \begin{figure}[b!]
+        \only<1>{\includegraphics[width=1.0\textwidth]{assets/pon-diagram-0.pdf}}
+        \only<2>{\includegraphics[width=1.0\textwidth]{assets/pon-diagram-1.pdf}}
+        \only<3>{\includegraphics[width=1.0\textwidth]{assets/pon-diagram-2.pdf}}
+        \only<4>{\includegraphics[width=1.0\textwidth]{assets/pon-diagram-3.pdf}}
+    \end{figure}
 
-\begin{frame}{Proof of Novelty}
-    \begin{enumerate}
-        \item[3] The owner makes a transaction on the blockchain and receives a random subset of content-hashes $\sV \subseteq \ContentSet$.
-        \item[4] The owner calculates the similarity of $\content$ with the elements of $\sV$, using a predefined similarity measure.
-    \end{enumerate}
-    \vfill
-    \includegraphics[width=1.0\textwidth]{assets/pon-diagram-1.pdf}
-\end{frame}
-
-\begin{frame}{Proof of Novelty}
-    \begin{enumerate}
-        \item[5] The blockchain chooses a random committee of peers that verify a subset of the results, $\sF \subseteq \sV$.
-    \end{enumerate}
-    \vfill
-    \includegraphics[width=1.0\textwidth]{assets/pon-diagram-2.pdf}
-\end{frame}
-
-\begin{frame}{Proof of Novelty}
-    \begin{enumerate}
-        \item[6] Consensus is reached by the committee regarding the legitimacy of the owner's calculations, and $c$ is accepted or rejected into $\ContentSet$.
-    \end{enumerate}
-    \vfill
-    \includegraphics[width=1.0\textwidth]{assets/pon-diagram-3.pdf}
 \end{frame}
 
 \subsection{System details}
-\begin{frame}{System details}
-    \begin{block}{Creating $\sF$ through sortition}
-        \emph{Cryptographic Sortition} can form committees without the need of interactions or exposure. Any peer holding a private key can verify and prove self-membership in the committee using a \emph{Verifiable Random Function}.
-    \end{block}\pause
+\begin{frame}[b]{System details}
+    \only<1>{
+        \begin{block}{Creating $\sF$ through sortition}
+            \emph{Cryptographic Sortition} can form committees without the need of interactions or exposure. Any peer holding a private key can verify and prove self-membership in the committee using a \emph{Verifiable Random Function}.
+        \end{block}
+    }
+    \only<2>{
+        \begin{block}{Similarity measure $s \colon \mathbb{C}^2 \rightarrow \mathbb{R}$}
+            A similarity measure is any function that quantifies the degree of similarity between objects, such as a \emph{Neural Network}.
+        \end{block}
+    }
+    \only<3>{
+        \begin{block}{Evaluating the owner's submitted results}
+            The committee must estimate if the similarity calculations between $c$ and elements of $\sV$ are legitimate, by observing only $\sF$.
+        \end{block}
+    }
     \vfill
-    \begin{block}{Similarity measure $s \colon \mathbb{C}^2 \rightarrow \mathbb{R}$}
-        A similarity measure is any function that quantifies the degree of similarity between objects, such as a \emph{Neural Neural Network}.
-    \end{block}\pause
-    \vfill
-    \begin{block}{Evaluating the owners submitted results}
-        The committee must estimate if the similarity calculations between $c$ and elements of $\sV$ are legitimate, by observing only $\sF$.
-    \end{block}
+    \includegraphics[width=1.0\textwidth]{assets/pon-diagram-3.pdf}
 \end{frame}
 
 \subsection{Probabilistic Guarantee of Novelty}
 \begin{frame}{Probabilistic Guarantee of Novelty}
     If the owner's content is accepted, it provides a \emph{probabilistic guarantee} that their content is novel.
 \end{frame}
-
-% \begin{frame}{Proof of Novelty}
-%     \begin{columns}
-%         \begin{column}{0.5\textwidth}
-%             \begin{enumerate}
-%                 \item The owner of content $\content$ wishes to prove to us it is trustworthy.
-%                 \item A collection of similar content $\ContentSet$ exists and is secured on the blockchain with content-addressable hashes.
-%             \end{enumerate}
-%         \end{column}
-%         \begin{column}{0.5\textwidth}
-%             \begin{center}
-%                 \includegraphics[width=0.5\textwidth]{image1.jpg}
-%             \end{center}
-%         \end{column}
-%     \end{columns}
-% \end{frame}
-
 
 \section{Take-away points}
 \begin{frame}{Take-away points}
@@ -221,95 +196,5 @@ Target audience: undergraduate students in STEM with a basic knowledge of Blockc
         \item Properly choosing $\sV$ and $\sF$ to optimize statistical and computational performance.
     \end{itemize}
 \end{frame}
-
-% \begin{frame}{Frame Title}
-% \begin{columns}
-% \begin{column}{0.5\textwidth}
-%   some text here some text here some text here some text here some text here
-% \end{column}
-% \begin{column}{0.5\textwidth}  %%<--- here
-%     \begin{center}
-%      \includegraphics[width=0.5\textwidth]{image1.jpg}
-%      \end{center}
-% \end{column}
-% \end{columns}
-% \end{frame}
-%---------------------------------------------------------
-%Changing visivility of the text
-% \begin{frame}
-% \frametitle{Sample frame title}
-% This is a text in second frame. For the sake of showing an example.
-
-% \begin{itemize}
-%     \item<1-> Text visible on slide 1
-%     \item<2-> Text visible on slide 2
-%     \item<3> Text visible on slides 3
-%     \item<4-> Text visible on slide 4
-% \end{itemize}
-% \end{frame}
-
-%---------------------------------------------------------
-
-
-%---------------------------------------------------------
-% %Example of the \pause command
-% \begin{frame}
-% In this slide \pause
-
-% the text will be partially visible \pause
-
-% And finally everything will be there
-% \end{frame}
-%---------------------------------------------------------
-
-% \section{Second section}
-
-%---------------------------------------------------------
-%Highlighting text
-% \begin{frame}
-% \frametitle{Sample frame title}
-
-% In this slide, some important text will be
-% \alert{highlighted} because it's important.
-% Please, don't abuse it.
-
-% \begin{block}{Remark}
-% Sample text
-% \end{block}
-
-% \begin{alertblock}{Important theorem}
-% Sample text in red box
-% \end{alertblock}
-
-% \begin{examples}
-% Sample text in green box. The title of the block is ``Examples".
-% \end{examples}
-% \end{frame}
-%---------------------------------------------------------
-
-
-%---------------------------------------------------------
-%Two columns
-% \begin{frame}
-% \frametitle{Two-column slide}
-
-% \begin{columns}
-
-% \column{0.5\textwidth}
-% This is a text in first column.
-% $$E=mc^2$$
-% \begin{itemize}
-% \item First item
-% \item Second item
-% \end{itemize}
-
-% \column{0.5\textwidth}
-% This text will be in the second column
-% and on a second tought this is a nice looking
-% layout in some cases.
-% \end{columns}
-% \end{frame}
-% %---------------------------------------------------------
-
 
 \end{document}
