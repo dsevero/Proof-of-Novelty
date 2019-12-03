@@ -37,14 +37,25 @@
 %The next block of commands puts the table of contents at the 
 %beginning of each section and highlights the current section:
 
-% \AtBeginSection[]
-% {
-%   \begin{frame}
-%     \frametitle{Table of Contents}
-%     \tableofcontents[currentsection]
-%   \end{frame}
-% }
+\AtBeginSection{
+  \begin{frame}
+    \frametitle{Table of Contents}
+    \tableofcontents[currentsection]
+  \end{frame}
+}
 %------------------------------------------------------------
+
+\AtEndDocument{
+    \begin{frame}
+        \Huge Thank you!
+        \large
+        \begin{enumerate}
+            \item[\faTwitter] \href{https://twitter.com/_dsevero}{\_dsevero}
+            \item[\faGithub] \href{https://github.com/dsevero}{dsevero}
+            \item[$\rightarrow$] \href{https://dsevero.com}{dsevero.com}
+        \end{enumerate}
+    \end{frame}
+}
 
 
 \begin{document}
@@ -92,13 +103,13 @@ Target audience: undergraduate students in STEM with a basic knowledge of Blockc
 \section{Trustworthiness}
 \begin{frame}{Trustworthiness}
     What does it mean to trust content? \pause Usually, we want \emph{novelty} and \emph{authenticity}.
-    
     \vfill
     \pause
     \begin{block}{Authenticity}
+        \pause
         \begin{itemize}
             \item Content is authentic when its origin is indisputable.\pause
-            \item Can be reasonably solved with Digital Signature.\pause
+            \item Can be reasonably solved with Digital Signatures.\pause
             \item Easy to check, since verifying signatures is fast.
         \end{itemize}
     \end{block}
@@ -107,13 +118,86 @@ Target audience: undergraduate students in STEM with a basic knowledge of Blockc
     
     \pause
     \begin{block}{Novelty}
+        \pause
         \begin{itemize}
             \item Subjective in nature, depends on the context.\pause
             \item Hard to check, requires comparing against archives.
         \end{itemize}
     \end{block}
-    
 \end{frame}
+
+\section{Proof of Novelty}
+\subsection{Overview}
+\begin{frame}{Proof of Novelty}
+    \begin{enumerate}
+        \item[1] The owner of content $\content$ wishes to prove to us it is trustworthy.
+        \item[2] A collection of similar content $\ContentSet$ exists and is secured on a blockchain with content-addressable hashes.
+    \end{enumerate}
+    \vfill
+    \includegraphics[width=1.0\textwidth]{assets/pon-diagram-0.pdf}
+\end{frame}
+
+\begin{frame}{Proof of Novelty}
+    \begin{enumerate}
+        \item[3] The owner makes a transaction on the blockchain and receives a random subset of content-hashes $\sV \subseteq \ContentSet$.
+        \item[4] The owner calculates the similarity of $\content$ with the elements of $\sV$, using a predefined similarity measure.
+    \end{enumerate}
+    \vfill
+    \includegraphics[width=1.0\textwidth]{assets/pon-diagram-1.pdf}
+\end{frame}
+
+\begin{frame}{Proof of Novelty}
+    \begin{enumerate}
+        \item[5] The blockchain chooses a random committee of peers that verify a subset of the results, $\sF \subseteq \sV$.
+    \end{enumerate}
+    \vfill
+    \includegraphics[width=1.0\textwidth]{assets/pon-diagram-2.pdf}
+\end{frame}
+
+\begin{frame}{Proof of Novelty}
+    \begin{enumerate}
+        \item[6] Consensus is reached by the committee regarding the legitimacy of the owner's calculations, and $c$ is accepted or rejected into $\ContentSet$.
+    \end{enumerate}
+    \vfill
+    \includegraphics[width=1.0\textwidth]{assets/pon-diagram-3.pdf}
+\end{frame}
+
+\subsection{System details}
+\begin{frame}{System details}
+    \begin{block}{Creating $\sF$ through sortition}
+        \emph{Cryptographic Sortition} can form committees without the need of interactions or exposure. Any peer holding a private key can verify and prove self-membership in the committee using a \emph{Verifiable Random Function}.
+    \end{block}\pause
+    \vfill
+    \begin{block}{Similarity measure $s \colon \mathbb{C}^2 \rightarrow \mathbb{R}$}
+        A similarity measure is any function that quantifies the degree of similarity between objects, such as a \emph{Neural Neural Network}.
+    \end{block}\pause
+    \vfill
+    \begin{block}{Evaluating the owners submitted results}
+        The committee must estimate if the similarity calculations between $c$ and elements of $\sV$ are legitimate, by observing only $\sF$.
+    \end{block}
+\end{frame}
+
+\subsection{Probabilistic Guarantee of Novelty}
+\begin{frame}{Probabilistic Guarantee of Novelty}
+    If the owner's content is accepted, it provides a \emph{probabilistic guarantee} that their content is novel.
+\end{frame}
+
+% \begin{frame}{Proof of Novelty}
+%     \begin{columns}
+%         \begin{column}{0.5\textwidth}
+%             \begin{enumerate}
+%                 \item The owner of content $\content$ wishes to prove to us it is trustworthy.
+%                 \item A collection of similar content $\ContentSet$ exists and is secured on the blockchain with content-addressable hashes.
+%             \end{enumerate}
+%         \end{column}
+%         \begin{column}{0.5\textwidth}
+%             \begin{center}
+%                 \includegraphics[width=0.5\textwidth]{image1.jpg}
+%             \end{center}
+%         \end{column}
+%     \end{columns}
+% \end{frame}
+
 
 \section{Take-away points}
 \begin{frame}{Take-away points}
@@ -127,14 +211,14 @@ Target audience: undergraduate students in STEM with a basic knowledge of Blockc
     \end{itemize}
 \end{frame}
 
-\section{Future Work}
-\begin{frame}{Future Work}
+\section{Open Questions and Future Work}
+\begin{frame}{Open Questions and Future Work}
     \begin{itemize}
-        \item implementing and running experiments on Smart Contract blockchains such as Ethereum;\pause
-        \item applying decentralized and collaborative machine learning to progressively update a similarity function;\pause
-        \item investigating statistical hypothesis tests and guarantees
+        \item Implementing and running experiments on Smart Contract blockchains such as Ethereum;\pause
+        \item Applying decentralized and collaborative machine learning to progressively update a similarity function;\pause
+        \item Investigating statistical hypothesis tests and guarantees
         for different content and similarity functions;\pause
-        \item properly choosing $\sV$ and $\sF$ to optimize statistical and computational performance.
+        \item Properly choosing $\sV$ and $\sF$ to optimize statistical and computational performance.
     \end{itemize}
 \end{frame}
 
