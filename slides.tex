@@ -4,7 +4,7 @@
 \usepackage{hyperref}
 
 \usepackage{utopia} %font utopia imported
-\setbeamercovered{transparent}
+% \setbeamercovered{transparent}
 
 \usetheme{Warsaw}
 \input{definitions.tex}
@@ -59,6 +59,8 @@
 \begin{frame}
 \frametitle{Table of Contents}
 \tableofcontents
+
+Target audience: undergraduate students in STEM with a basic knowledge of Blockchain technology.
 \end{frame}
 %---------------------------------------------------------
 
@@ -72,15 +74,14 @@
     \vfill
     
     \begin{itemize}
-        \item Content is trustworthy if it is \emph{authentic} and \emph{novel}.\pause
         \item Existing content can be manipulated for ill-usage.
     \end{itemize}
     
     \vfill
     
     \begin{figure}
-        \centering
-        \visible<3>{
+        \visible<2>{
+            \centering
             \includegraphics[width=4cm,keepaspectratio]{assets/trustworth-example-obama.png}
             \caption{Obama speech out of context.}
         }
@@ -88,17 +89,31 @@
     
 \end{frame}
 
-% \section{Take-away points}
-% \begin{frame}{Take-away points}
-%     \emph{Proof of Novelty} ...
-%     \begin{itemize}
-%         \item is a certificate issued by a decentralized and trustless system;\pause
-%         \item provides probabilistic guarantees of content novelty;\pause
-%         \item can scale by using cryptographic sortition;\pause
-%         \item defines similarity through similarity measures;\pause
-%         \item can be extended to any content type by switching the similarity measure.
-%     \end{itemize}
-% \end{frame}
+\section{Trustworthiness}
+\begin{frame}{Trustworthiness}
+    What does it mean to trust content? \pause Usually, we want \emph{novelty} and \emph{authenticity}.
+    
+    \vfill
+    \pause
+    \begin{block}{Authenticity}
+        \begin{itemize}
+            \item Content is authentic when its origin is indisputable.\pause
+            \item Can be reasonably solved with Digital Signature.\pause
+            \item Easy to check, since verifying signatures is fast.
+        \end{itemize}
+    \end{block}
+    
+    \vfill
+    
+    \pause
+    \begin{block}{Novelty}
+        \begin{itemize}
+            \item Subjective in nature, depends on the context.\pause
+            \item Hard to check, requires comparing against archives.
+        \end{itemize}
+    \end{block}
+    
+\end{frame}
 
 \section{Take-away points}
 \begin{frame}{Take-away points}
