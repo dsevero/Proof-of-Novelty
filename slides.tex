@@ -1,10 +1,13 @@
 \documentclass{beamer}
 \usepackage[utf8]{inputenc}
+\usepackage{fontawesome}
+\usepackage{hyperref}
 
 \usepackage{utopia} %font utopia imported
 \setbeamercovered{transparent}
 
 \usetheme{Warsaw}
+\input{definitions.tex}
 % \usecolortheme{orchid}
 
 %------------------------------------------------------------
@@ -15,7 +18,7 @@
 
 \subtitle{A distributed consensus mechanism for securing content novelty}
 
-\author[Severo, Daniel] % (optional)
+\author[\href{https://dsevero.com}{dsevero.com}] % (optional)
 {Daniel Severo}
 
 \institute % (optional)
@@ -34,13 +37,13 @@
 %The next block of commands puts the table of contents at the 
 %beginning of each section and highlights the current section:
 
-\AtBeginSection[]
-{
-  \begin{frame}
-    \frametitle{Table of Contents}
-    \tableofcontents[currentsection]
-  \end{frame}
-}
+% \AtBeginSection[]
+% {
+%   \begin{frame}
+%     \frametitle{Table of Contents}
+%     \tableofcontents[currentsection]
+%   \end{frame}
+% }
 %------------------------------------------------------------
 
 
@@ -63,30 +66,61 @@
 \section{Motivation}
 \begin{frame}{Motivation}
     \begin{block}{Motivational question}
-        Somebody sends you a video, how do you know it is trustworthy?
-    \end{block}
-    trustworthy = authentic + novel
-\end{frame}
-
-\section{Current Solutions}
-\begin{frame}{Current Solutions}
-\end{frame}
-
-\section{Patent Systems}
-\begin{frame}{Patent Systems}
-\end{frame}
-
-\section{Recap}
-\begin{frame}{Recap}
-\begin{enumerate}
-    \item<1-> Trustworthy content must be authentic and novel.
-
-    \item<2-> Authenticity can be solved with Digital Signatures, but novelty requires searching for Prior Art.
+        Somebody sends you a video, how do you know it is \emph{trustworthy}?
+    \end{block}\pause
     
-    \item<3-> Trustless and distributed Prior Art search can be done using Blockchains, Content-addressable storage, Cryptographic Sortition and Similarity Measures.
+    \vfill
+    
+    \begin{itemize}
+        \item Content is trustworthy if it is \emph{authentic} and \emph{novel}.\pause
+        \item Existing content can be manipulated for ill-usage.
+    \end{itemize}
+    
+    \vfill
+    
+    \begin{figure}
+        \centering
+        \visible<3>{
+            \includegraphics[width=4cm,keepaspectratio]{assets/trustworth-example-obama.png}
+            \caption{Obama speech out of context.}
+        }
+    \end{figure}
+    
+\end{frame}
 
-    \item<4-> 
-\end{enumerate}
+% \section{Take-away points}
+% \begin{frame}{Take-away points}
+%     \emph{Proof of Novelty} ...
+%     \begin{itemize}
+%         \item is a certificate issued by a decentralized and trustless system;\pause
+%         \item provides probabilistic guarantees of content novelty;\pause
+%         \item can scale by using cryptographic sortition;\pause
+%         \item defines similarity through similarity measures;\pause
+%         \item can be extended to any content type by switching the similarity measure.
+%     \end{itemize}
+% \end{frame}
+
+\section{Take-away points}
+\begin{frame}{Take-away points}
+    \emph{Proof of Novelty} ...
+    \begin{itemize}
+        \item is a certificate issued by a decentralized and trustless system;\pause
+        \item provides probabilistic guarantees of content novelty;\pause
+        \item can scale by using cryptographic sortition;\pause
+        \item defines similarity through similarity measures;\pause
+        \item can be extended to any content type by switching the similarity measure.
+    \end{itemize}
+\end{frame}
+
+\section{Future Work}
+\begin{frame}{Future Work}
+    \begin{itemize}
+        \item implementing and running experiments on Smart Contract blockchains such as Ethereum;\pause
+        \item applying decentralized and collaborative machine learning to progressively update a similarity function;\pause
+        \item investigating statistical hypothesis tests and guarantees
+        for different content and similarity functions;\pause
+        \item properly choosing $\sV$ and $\sF$ to optimize statistical and computational performance.
+    \end{itemize}
 \end{frame}
 
 % \begin{frame}{Frame Title}
