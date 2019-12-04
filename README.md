@@ -5,12 +5,6 @@
 
 ![PoN Diagram](assets/pon-diagram-full.png)
 
-<object data="http://yoursite.com/the.pdf" type="application/pdf" width="700px" height="700px">
-    <embed src="http://yoursite.com/the.pdf">
-        <p>This browser does not support PDFs. Please download the PDF to view it: <a href="http://yoursite.com/the.pdf">Download PDF</a>.</p>
-    </embed>
-</object>
-
 
 [![OpenReview](http://img.shields.io/badge/OpenReview-BJlfBONxnS-B31B1B.svg)](https://openreview.net/forum?id=BJlfBONxnS)
 [![DOI](https://img.shields.io/badge/figshare-10324883.v1-orange)](https://figshare.com/articles/Proof_of_Novelty/10324883)
