@@ -9,7 +9,6 @@
 [![OpenReview](http://img.shields.io/badge/OpenReview-BJlfBONxnS-B31B1B.svg)](https://openreview.net/forum?id=BJlfBONxnS)
 [![DOI](https://img.shields.io/badge/figshare-10324883.v1-orange)](https://figshare.com/articles/Proof_of_Novelty/10324883)
 [![Paper](https://img.shields.io/badge/paper-pdf-2B917B.svg)](https://nbviewer.jupyter.org/github/dsevero/Proof-of-Novelty/blob/master/Proof-of-Novelty.pdf)
-</div>
 [![Slides](https://img.shields.io/badge/slides-pdf-2B9170.svg)](https://nbviewer.jupyter.org/github/dsevero/Proof-of-Novelty/blob/master/Proof-of-Novelty-slides.pdf)
 </div>
 
