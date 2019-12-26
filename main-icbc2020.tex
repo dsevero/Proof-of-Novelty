@@ -63,7 +63,7 @@ Distance functions $d$ are common throughout literature and can be converted int
 There is a vast amount of literature addressing metrics for text, full-motion videos and audio applications \cite{kulis2013metric}. The field of \emph{Similarity Learning} is concerned with the task of learning similarity and distance functions through the usage of labeled examples and Machine Learning techniques (i.e. Supervised Machine Learning) \cite{kulis2013metric}.
  
 
-\subsection{Blockchains and Smart Contracts}
+\subsection{Blockchains}
 A Blockchain is a growing list of ordered records that contain digitally signed transactions \cite{antonopoulos2018mastering}. Appending a record to the chain is done by cryptographically hashing the list and adding it to the incoming record. Blockchains are considered immutable, since altering a transaction anywhere in the list would require recomputing the hash of all records that came after it \cite{antonopoulos2018mastering}. This data structure often lives on a distributed public peer-to-peer network, where all peers hold a copy of the list and must reach consensus on which incoming blocks should be appended. 
 
 Multiple consensus mechanism have been proposed throughout literature. Examples are Proof of Work \cite{dwork1992pricing}, Stake \cite{king2012ppcoin} and Authority \cite{de2018pbft} (PoW, PoS, and PoA; respectively). Some protocols require partial centralization to be secure, such as PoS and PoA. PoW can be fully distributed, but is inefficient in the time it takes to append a new block to the chain and requires a surplus amount of resources \cite{dwork1992pricing}.
@@ -88,16 +88,16 @@ A \emph{similarity measure} on $\ContentSet$ is a function $\simfunc \colon \Con
 
 The system will accept or reject the insertion of a candidate $\content^\prime \notin \ContentSet$ based on a subset of similar content $$\sS(\content^\prime, \sV) = \left\{ \simfunc(\content,\content^\prime) \mid \forall \content \in \sV \subseteq \ContentSet \right\}$$
 
-with some rule $R$ 
+with some rule $\mathcal{H}$ 
 
-$$\sS(\content^\prime, \sV) \xrightarrow{R} r \in \text{\{accept, reject\}}$$
+$$\sS(\content^\prime, \sV) \xrightarrow{\mathcal{H}} r \in \text{\{accept, reject\}}$$
 
-where $(R, s)$ is defined through consensus.
+where $(\mathcal{H}, s)$ is defined through consensus.
 
-Accepting $\content^\prime$ can be viewed as the equivalent of emitting a \emph{certificate of novelty}. The objective is to minimize the rate of false positives while maintaining a reasonable rate of acceptance. An owner $\owner$ wishing to prove novelty of $\content$ can do so by showing that $\content \in \ContentSet$ and $\content \xrightarrow{} \owner$ to any entity that trusts the system $\left(R, \simfunc \right)$.
+Accepting $\content^\prime$ can be viewed as the equivalent of emitting a \emph{certificate of novelty}. The objective is to minimize the rate of false positives while maintaining a reasonable rate of acceptance. An owner $\owner$ wishing to prove novelty of $\content$ can do so by showing that $\content \in \ContentSet$ and $\content \xrightarrow{} \owner$ to any entity that trusts the system $\left(\mathcal{H}, \simfunc \right)$.
 
 \section{Related Work}
-Previous work has tackled the problem of authenticity (i.e. proving provenance) by securing files on content-addressable storage (e.g. IPFS) with blockchain technology. \cite{hasan2019combating} implements a Smart Contract on EVM where artists can register their content hosted on IPFS to be shared, modified, and purchased. The blockchain tracks a history of interactions and creates a hierarchy of parent-child relationships that makes it possible to trace content provenance. Bernstein \cite{Bernstein} is a decentralized app that implements a Patent System. It can prove ownership, existence and integrity (i.e. tamper-proof) of stored files. ARCHANGEL \cite{bui2019archangel} is a tamper-proof video archive equipped with a content hashing mechanism insensitive to most lossless compression algorithms.
+Previous work has tackled the problem of authenticity (i.e. proving provenance) by securing files on content-addressable storage (e.g. IPFS) with blockchain technology. \cite{hasan2019combating} implements a Smart Contract on EVM where artists can register their content hosted on IPFS to be shared, modified, and purchased. The blockchain tracks a history of interactions and creates a hierarchy of parent-child relationships that makes it possible to trace content provenance. Bernstein \cite{Bernstein} is a decentralized app that implements a Patent System. It can prove ownership, existence and integrity (i.e. tamper-proof) of stored files. ARCHANGEL \cite{bui2019archangel} is a tamper-proof video archive equipped with a content hashing mechanism insensitive to most lossy compression algorithms.
 
 None of these are capable of verifying novelty of files submitted to the system. A malicious agent can download content, modify it for ill-usage, and submit it back to the blockchain. Even though it is possible to prove that the modified content was inserted after the original (since blockchains are ordered lists), there is still the issue of locating the original content for comparison. 
 
@@ -112,8 +112,16 @@ MediaChain was a peer-to-peer database for users to collaborate on open-media. I
 % - https://arxiv.org/abs/1901.03136\\
 \section{Design Proposal}
 An overview of the system is presented through narrative. Details are addressed in later subsections. 
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.45\textwidth, keepaspectratio]{assets/pon-diagram-full-icbc2020.png}
+    \caption{System overview. The set $\ContentSet$ represents the content archive; $\sV$ is a subset of $\ContentSet$ and is created by the blockchain to be validated by the owner of $\content$; $\sF$ is chosen with cryptographic sortition as a random subset of $\sV$ and is used a sample for validation; $\simfunc$ is a similarity function and $\mathcal{H}$ is the rule (most likely a hypothesis test) that accepts or rejects $\content$.}
+    \label{fig:diagram}
+\end{figure}
+
 \subsection{Overview}\label{overview}
-Consider a credible archive $\ContentSet$ of similar content, with content-addressable hashes secured on a smart contract enabled blockchain, an associated similarity measure $\simfunc$, and an acceptance/rejection rule $R$. For example, arXiv articles stored on IPFS with community defined $s$ and $R$ secured by Ethereum. Note that credibility is a consensus amongst peers and not an intrinsic property of the archive (e.g. scholarly peer-reviewed venues). An owner $\owner^\prime$,  wishing to prove novelty of content $\content^\prime \notin \ContentSet$, makes a transaction on the blockchain and receives a random subset of content-hashes of elements $\content \in \sV \subseteq \ContentSet$. The owner now uses $\simfunc$ to calculate the similarity of $\content^\prime$ with the elements of $\sV$ (i.e. $\sS(\content^\prime, \sV)$) and submits the calculations back to the smart contract for evaluation. Using cryptographic sortition, the smart contract chooses a random committee that is tasked with off-chain verification of a subset of the results, $\sS(\content^\prime, \sF \subseteq \sV)$. Consensus is reached by the committee regarding the legitimacy of $\sS(\content^\prime, \sV)$, and $\content^\prime$ is accepted or rejected into the archive based on the rule $R$.
+Consider a credible archive $\ContentSet$ of similar content, with content-addressable hashes secured on a smart contract enabled blockchain, an associated similarity measure $\simfunc$, and an acceptance/rejection rule $\mathcal{H}$. For example, arXiv articles stored on IPFS with community defined $s$ and $\mathcal{H}$ secured by Ethereum. Note that credibility is a consensus amongst peers and not an intrinsic property of the archive (e.g. scholarly peer-reviewed venues). An owner $\owner^\prime$,  wishing to prove novelty of content $\content^\prime \notin \ContentSet$, makes a transaction on the blockchain and receives a random subset of content-hashes of elements $\content \in \sV \subseteq \ContentSet$. The owner now uses $\simfunc$ to calculate the similarity of $\content^\prime$ with the elements of $\sV$ (i.e. $\sS(\content^\prime, \sV)$) and submits the calculations back to the smart contract for evaluation. Using cryptographic sortition, the smart contract chooses a random committee that is tasked with off-chain verification of a subset of the results, $\sS(\content^\prime, \sF \subseteq \sV)$. Consensus is reached by the committee regarding the legitimacy of $\sS(\content^\prime, \sV)$, and $\content^\prime$ is accepted or rejected into the archive based on the rule $\mathcal{H}$.
 
 \subsection{Choosing $\sV$ and $\sF$}
 The degree of novelty verified by the system is directly related to the cardinality (i.e. number of elements) of $\sV$, represented by $\vert\sV\vert$. Making $\sV = \ContentSet$ will guarantee that all files in the archive are compared against the candidate content $\content^\prime$, but will make the computation of $\sS(\content^\prime, \sV)$ resource intensive. Similarly, raising $\vert\sF\vert$ decreases the probability that an owner can successfully manipulate the values of $\sS(\content^\prime, \sV)$, but requires more computational power during the verification process by network peers.
@@ -124,7 +132,7 @@ Scalability of this solution comes from the fact that $\vert\sF\vert < \vert\sV\
 Using only $\sS(\content^\prime, \sF \subseteq \sV)$, the committee must infer if $\sS(\content^\prime, \sV)$ is valid. Inference through statistical hypothesis testing \cite{newey1994large} can be leveraged to decide if candidate content is novel.
 
 \subsection{Certificate of Novelty}
-Showing that the content-hash of $\content$ is in the distributed archive (i.e. $\content \in \ContentSet$) provides credibility with respect to the novelty of $\content$. Agencies can request that candidates provide PoN on distinct $(R, \simfunc)$ for different tasks. For example, peer-reviewed journals can use arXiv to build a blockchain where researchers submit their written work for tests against plagiarism before submission.
+Showing that the content-hash of $\content$ is in the distributed archive (i.e. $\content \in \ContentSet$) provides credibility with respect to the novelty of $\content$. Agencies can request that candidates provide PoN on distinct $(\mathcal{H}, \simfunc)$ for different tasks. For example, peer-reviewed journals can use arXiv to build a blockchain where researchers submit their written work for tests against plagiarism before submission.
 
 Notice that the burden of proof of novelty is bestowed upon the owner of the candidate content, and not the the network. This design can also provide varying levels of proof. For example, a content validated against a larger value of $\vert\sF\vert$ will result in a higher confidence of novelty. This can be extended to the point where there are varying or even continuous levels of confidence, where the candidate owner can resubmit the same content to the blockchain when demanded by a third party that trusts the system.
 
